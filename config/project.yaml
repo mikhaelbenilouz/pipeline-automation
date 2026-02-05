@@ -1,0 +1,14 @@
+project:
+  name: "MonApp"
+  language: "fr"              # Langue des rapports et génération
+  framework: "robot"          # Framework cible
+
+robot:
+  library: "SeleniumLibrary"
+  browser: "chrome"
+
+validation:
+  require_draft_approval: true
+
+output:
+  path: "./output/robot"

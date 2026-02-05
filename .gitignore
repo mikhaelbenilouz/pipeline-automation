@@ -1,0 +1,24 @@
+# Drafts temporaires
+drafts/pom/*.resource
+drafts/tests/*.robot
+
+# Logs Robot Framework
+output/robot/log.html
+output/robot/report.html
+output/robot/output.xml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+.env
+venv/
