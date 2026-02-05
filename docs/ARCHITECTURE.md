@@ -2,88 +2,77 @@
 
 ## Vue d'ensemble
 
-Ce workspace permet de générer des tests automatisés pour applications web via une approche conversationnelle avec des agents spécialisés.
+Workspace de génération de tests automatisés pour applications web via des agents spécialisés.
 
 ## Arborescence
 
 ```
 pipeline-automation/
 ├── .claude/
-│   ├── settings.json              # Config Claude Code
-│   └── commands/
-│       ├── discover.md            # /discover - Agent Discovery
-│       ├── map.md                 # /map - Agent Cartographe
-│       ├── pom.md                 # /pom - Agent POM Generator
-│       ├── test.md                # /test - Agent Test Generator
-│       └── update.md              # /update - Agent Updater
-│
-├── config/
-│   ├── project.yaml               # Config projet (langue, framework)
-│   └── naming-conventions.yaml    # Patterns de nommage
+│   ├── settings.json
+│   ├── commands/              # Agents (agnostiques)
+│   │   ├── discover.md        # /discover
+│   │   ├── map.md             # /map [screen]
+│   │   ├── pom.md             # /pom [screen]
+│   │   ├── test.md            # /test [screen|journey]
+│   │   └── update.md          # /update
+│   └── skills/                # Skills par framework
+│       └── robot/
+│           ├── pom.md         # Templates POM Robot
+│           └── test.md        # Templates tests Robot
 │
 ├── docs/
-│   ├── ARCHITECTURE.md            # Ce fichier
-│   ├── roadmap.md                 # Roadmap générée (phases + tâches)
-│   └── app-context.md             # Contexte applicatif
+│   ├── ARCHITECTURE.md        # Ce fichier
+│   ├── app-context.md         # Contexte applicatif (généré)
+│   └── roadmap.md             # Roadmap (générée)
 │
 ├── screens/
-│   ├── _template/                 # Template pour nouvel écran
+│   ├── _template/
 │   └── {ecran}/
-│       ├── screenshots/           # Captures d'écran (états)
-│       └── report.md              # Rapport de cartographie
+│       ├── screenshots/       # Captures d'écran
+│       └── report.md          # Rapport cartographie
 │
-├── drafts/                        # Drafts pour validation
+├── drafts/                    # Validation avant génération
 │   ├── pom/
 │   └── tests/
 │
-├── output/robot/                  # Fichiers générés finaux
+├── output/{framework}/        # Fichiers finaux
 │   ├── resources/
-│   │   ├── pages/                 # POM par écran
-│   │   ├── layouts/               # navbar, sidebar, footer
-│   │   └── common/                # Keywords partagés
-│   └── tests/                     # Suites de tests
+│   │   ├── pages/
+│   │   ├── layouts/
+│   │   └── common/
+│   └── tests/
 │
-├── CLAUDE.md                      # Instructions globales
+├── CLAUDE.md                  # Config + règles (source de vérité)
 └── .gitignore
 ```
 
-## Flux inter-agents
+## Flux
 
 ```
-┌─────────────┐
-│  /discover  │ ──► docs/app-context.md + docs/roadmap.md
-└─────────────┘
-       │
-       ▼ (humain dépose screenshots)
-┌─────────────┐
-│    /map     │ ──► screens/{x}/report.md
-└─────────────┘
-       │
-       ▼
-┌─────────────┐
-│    /pom     │ ──► drafts/pom/ ──► output/robot/resources/
-└─────────────┘
-       │
-       ▼ (humain remplit __SELECTOR__)
-┌─────────────┐
-│    /test    │ ──► drafts/tests/ ──► output/robot/tests/
-└─────────────┘
+/discover ──► docs/app-context.md + docs/roadmap.md
+    │
+    ▼ (screenshots)
+/map ──► screens/{x}/report.md
+    │
+    ▼
+/pom ──► drafts/pom/ ──► output/{framework}/resources/
+    │
+    ▼ (humain: __SELECTOR__)
+/test ──► drafts/tests/ ──► output/{framework}/tests/
 
-       ═══════════════
-       Si évolution :
-       ═══════════════
-
-┌─────────────┐
-│   /update   │ ──► Analyse + Plan d'impacts ──► Mise à jour ciblée
-└─────────────┘
+/update ──► Plan d'impacts ──► Mise à jour ciblée
 ```
 
-## Règles de génération
+## Configuration
 
-- Validation humaine obligatoire avant génération finale
-- Pas de mention d'IA/agent dans les fichiers générés
-- Pas de commentaires excessifs
-- Style Gherkin natif (Given/When/Then)
-- Pas de keywords wrapper atomiques
-- Layouts séparés des pages
-- Placeholders `__SELECTOR__` pour les sélecteurs
+Toute la configuration est dans `CLAUDE.md` :
+- `<config>` : projet, langue, framework, validation, output
+- `<naming-conventions>` : patterns de nommage
+
+## Skills par framework
+
+Les commands sont agnostiques. Elles délèguent au skill du framework configuré :
+- `robot` : `.claude/skills/robot/`
+- `cypress` : `.claude/skills/cypress/` (à créer)
+- etc.
