@@ -28,37 +28,6 @@ Workspace de génération de tests automatisés pour applications web.
   </output>
 </config>
 
-<naming-conventions>
-  <elements>
-    <pattern>{prefix}_{name}_{screen}</pattern>
-    <prefixes>
-      <button>btn</button>
-      <input>inp</input>
-      <link>lnk</link>
-      <text>txt</text>
-      <list>lst</list>
-      <item>itm</item>
-      <image>img</image>
-      <checkbox>chk</checkbox>
-      <radio>rdo</radio>
-      <select>sel</select>
-      <textarea>txa</textarea>
-      <container>ctn</container>
-      <card>crd</card>
-    </prefixes>
-  </elements>
-
-  <files>
-    <page>{screen_name}.resource</page>
-    <layout>{layout_name}.resource</layout>
-    <test>{feature}.robot</test>
-  </files>
-
-  <keywords>
-    <style>Title Case</style>
-  </keywords>
-</naming-conventions>
-
 ## Règles globales
 
 - Validation humaine obligatoire avant génération finale

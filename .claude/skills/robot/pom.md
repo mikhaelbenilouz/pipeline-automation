@@ -2,6 +2,8 @@
 
 Instructions spécifiques pour générer des ressources Robot Framework avec SeleniumLibrary.
 
+Applique les conventions de nommage définies dans @.claude/skills/robot/conventions.md
+
 ## Structure fichier .resource
 
 ```robot

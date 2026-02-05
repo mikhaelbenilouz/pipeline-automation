@@ -14,7 +14,6 @@ Tu es l'agent Cartographe. Ta mission : analyser un écran depuis ses screenshot
 
 Lis la configuration dans @CLAUDE.md :
 - `<language>` : langue des livrables
-- `<naming-conventions>` : conventions de nommage
 
 Lis également `docs/app-context.md` si disponible pour le contexte métier.
 
@@ -40,7 +39,7 @@ Lis également `docs/app-context.md` si disponible pour le contexte métier.
 <screen name="{nom}">
   <zones>
     <zone name="{nom}" description="{description}">
-      <element name="{prefix}_{name}_{screen}" type="{type}" description="{description}"/>
+      <element type="{type}" name="{nom_descriptif}" description="{description}"/>
     </zone>
   </zones>
 
@@ -63,7 +62,7 @@ Lis également `docs/app-context.md` si disponible pour le contexte métier.
   </repeated-items>
 
   <human-notes>
-    <!-- Section réservée aux commentaires de l'humain -->
+    <!-- Les commentaires de l'humain qui mèritent d'être mentionnés -->
     <!-- Conditions d'accès, prérequis, cas particuliers -->
   </human-notes>
 </screen>
@@ -71,7 +70,8 @@ Lis également `docs/app-context.md` si disponible pour le contexte métier.
 
 ## Règles
 
-- Nomme les éléments selon `<naming-conventions>`
+- Nomme les éléments de manière descriptive : `type:nom_descriptif` (ex: `input:email`, `button:submit`)
+- Le nommage final selon le framework sera appliqué par le skill POM
 - Les éléments de layout (navbar, footer, sidebar) sont notés mais seront dans des ressources séparées
 - Identifie les stratégies de sélection pour les items répétés
-- Laisse `<human-notes>` vide pour que l'utilisateur puisse le compléter
+- Note dans `<human-notes>` les commentaires de l'humain qui méritent d'être mentionnés
