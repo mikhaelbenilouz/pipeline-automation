@@ -34,9 +34,6 @@ Workspace de génération de tests automatisés pour applications web.
 - Pas de mention d'IA/agent dans les fichiers générés
 - Pas de commentaires excessifs
 - Les layouts (navbar, sidebar, footer) ont leurs propres ressources
-- Style Gherkin natif (Given/When/Then/And/But) sur lignes séparées
-- Pas de keywords wrapper atomiques
-- Synchronisation sur éléments, jamais de waits en dur
 - Les commands chargent le skill du framework indiqué dans `<framework>`
 
 ## Workflow type
