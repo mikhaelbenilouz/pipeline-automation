@@ -39,7 +39,6 @@ Lis également :
 
 ## Règles globales
 
-- Style Gherkin : Given/When/Then/And/But sur lignes séparées
 - Pas de commentaires excessifs
 - Utiliser les keywords métier des ressources
 - Aucune mention de génération automatique
