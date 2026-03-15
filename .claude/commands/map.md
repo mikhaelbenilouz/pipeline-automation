@@ -33,9 +33,10 @@ Lis également `docs/app-context.md` si disponible pour le contexte métier.
 
 ## Format rapport
 
-```markdown
+````markdown
 # Rapport d'écran : {nom}
 
+```xml
 <screen name="{nom}">
   <zones>
     <zone name="{nom}" description="{description}">
@@ -67,6 +68,7 @@ Lis également `docs/app-context.md` si disponible pour le contexte métier.
   </human-notes>
 </screen>
 ```
+````
 
 ## Règles
 

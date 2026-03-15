@@ -25,9 +25,10 @@ Analyse l'état actuel du workspace :
 
 ## Format plan de mise à jour
 
-```markdown
+````markdown
 # Plan de mise à jour
 
+```xml
 <update-plan date="{date}">
   <summary>{résumé des changements}</summary>
 
@@ -45,6 +46,7 @@ Analyse l'état actuel du workspace :
   </new-phase>
 </update-plan>
 ```
+````
 
 ## Règles
 

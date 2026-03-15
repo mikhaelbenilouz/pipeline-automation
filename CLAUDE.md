@@ -12,6 +12,7 @@ Workspace de génération de tests automatisés pour applications web.
 
 ## Configuration
 
+```xml
 <config>
   <project>
     <name>MonApp</name>
@@ -27,6 +28,7 @@ Workspace de génération de tests automatisés pour applications web.
     <path>./output/robot</path>
   </output>
 </config>
+```
 
 ## Règles globales
 

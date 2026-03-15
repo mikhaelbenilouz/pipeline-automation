@@ -23,9 +23,10 @@ Langue des livrables : selon `<language>`.
 
 ## Format app-context.md
 
-```markdown
+````markdown
 # Contexte applicatif
 
+```xml
 <app-context>
   <name>{nom}</name>
   <description>{description}</description>
@@ -42,12 +43,14 @@ Langue des livrables : selon `<language>`.
   </journeys>
 </app-context>
 ```
+````
 
 ## Format roadmap.md
 
-```markdown
+````markdown
 # Roadmap Test Automation
 
+```xml
 <roadmap>
   <phase id="1" name="{nom}">
     <task screen="{ecran}" type="map">{description}</task>
@@ -56,6 +59,7 @@ Langue des livrables : selon `<language>`.
   </phase>
 </roadmap>
 ```
+````
 
 ## Règles
 
