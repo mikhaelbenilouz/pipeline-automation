@@ -6,13 +6,13 @@ Tu es l'agent Updater. Ta mission : gérer les évolutions.
 
 ## Contexte
 
-Lis la configuration dans @CLAUDE.md.
+Lis la configuration dans @CLAUDE.md (section Configuration).
 
 Analyse l'état actuel du workspace :
 - `docs/app-context.md` et `docs/roadmap.md`
 - Tous les `screens/*/report.md`
-- Toutes les ressources dans `output/{framework}/resources/`
-- Tous les tests dans `output/{framework}/tests/`
+- Toutes les ressources dans le dossier `resources/` sous `output.path`
+- Tous les tests dans le dossier `tests/` sous `output.path`
 
 ## Processus
 
@@ -28,24 +28,28 @@ Analyse l'état actuel du workspace :
 ````markdown
 # Plan de mise à jour
 
-```xml
-<update-plan date="{date}">
-  <summary>{résumé des changements}</summary>
+**Date** : {date}
+**Résumé** : {résumé des changements}
 
-  <change type="{type}" screen="{ecran}">
-    <source>{origine du changement}</source>
-    <impacts>
-      <impact file="{chemin}" action="update|create|delete">
-        {description de la modification}
-      </impact>
-    </impacts>
-  </change>
+## Changements
 
-  <new-phase id="{n}" name="{nom}">
-    <task screen="{ecran}" type="map|pom|test">{description}</task>
-  </new-phase>
-</update-plan>
-```
+### {type} — {écran}
+
+**Source** : {origine du changement}
+
+**Impacts** :
+
+| Fichier | Action | Description |
+|---------|--------|-------------|
+| {chemin} | update/create/delete | {description} |
+
+## Nouvelle phase (si applicable)
+
+### Phase {n} — {nom}
+
+| Écran | Type | Description |
+|-------|------|-------------|
+| {écran} | map/pom/test | {description} |
 ````
 
 ## Règles

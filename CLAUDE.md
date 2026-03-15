@@ -12,23 +12,11 @@ Workspace de génération de tests automatisés pour applications web.
 
 ## Configuration
 
-```xml
-<config>
-  <project>
-    <name>MonApp</name>
-    <language>fr</language>
-    <framework>robot</framework>
-  </project>
-
-  <validation>
-    <require-draft-approval>true</require-draft-approval>
-  </validation>
-
-  <output>
-    <path>./output/robot</path>
-  </output>
-</config>
-```
+- **project.name** : MonApp
+- **project.language** : fr
+- **project.framework** : robot
+- **validation.require-draft-approval** : true
+- **output.path** : ./output/robot
 
 ## Règles globales
 
@@ -36,7 +24,7 @@ Workspace de génération de tests automatisés pour applications web.
 - Pas de mention d'IA/agent dans les fichiers générés
 - Pas de commentaires excessifs
 - Les layouts (navbar, sidebar, footer) ont leurs propres ressources
-- Les commands chargent le skill du framework indiqué dans `<framework>`
+- Les commands chargent le skill du framework indiqué dans `project.framework`
 
 ## Workflow type
 

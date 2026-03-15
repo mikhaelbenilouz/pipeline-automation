@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-03-15 — Migration vers markdown pur
+
+Tout le XML embarqué est éliminé du projet. La configuration dans CLAUDE.md utilise désormais une liste dot-notation. Les templates de sortie des commands `/discover`, `/map` et `/update` sont en markdown pur avec sections hiérarchiques et tableaux. Les 5 commands référencent la config en dot-notation.
+
+> [Session complète](.docs/sessions/2026-03-15-migration-markdown-pur.md)
+
 ## 2026-03-15 — Création de l'application de démo TaskFlow
 
 L'application de démo est créée : un gestionnaire de tâches en HTML/CSS/JS vanilla avec 8 pages (login, dashboard avec vues liste et kanban, CRUD tâches, CRUD utilisateurs, profil). L'app est fonctionnelle avec auth simulée, persistance localStorage et données de démo pré-chargées.

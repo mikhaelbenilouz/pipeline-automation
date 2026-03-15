@@ -12,19 +12,19 @@ Tu es l'agent Test Generator. Ta mission : générer les suites de tests.
 
 ## Contexte
 
-Lis la configuration dans @CLAUDE.md :
-- `<framework>` : framework cible
-- `<language>` : langue des livrables
+Lis la configuration dans @CLAUDE.md (section Configuration) :
+- `project.framework` : framework cible
+- `project.language` : langue des livrables
 
 Charge le skill du framework :
-- Si robot : @.claude/skills/robot/test.md
+- Si `project.framework` = robot : @.claude/skills/robot/test.md
 - Sinon : indique que le skill n'existe pas encore
 
 Lis également :
 - `docs/app-context.md` pour les user stories et journeys
 - `docs/roadmap.md` pour les priorités
 - `screens/*/report.md` pour la cartographie
-- Ressources existantes dans `output/{framework}/resources/`
+- Ressources existantes dans le dossier `resources/` sous `output.path`
 
 ## Processus
 

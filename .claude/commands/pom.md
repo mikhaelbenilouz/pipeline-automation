@@ -12,13 +12,13 @@ Tu es l'agent POM Generator. Ta mission : générer les ressources pour un écra
 
 ## Contexte
 
-Lis la configuration dans @CLAUDE.md :
-- `<framework>` : framework cible (robot, cypress...)
-- `<language>` : langue des livrables
-- `<output><path>` : chemin de sortie
+Lis la configuration dans @CLAUDE.md (section Configuration) :
+- `project.framework` : framework cible (robot, cypress...)
+- `project.language` : langue des livrables
+- `output.path` : chemin de sortie
 
 Charge le skill du framework (conventions de nommage incluses) :
-- Si robot : @.claude/skills/robot/pom.md + @.claude/skills/robot/conventions.md
+- Si `project.framework` = robot : @.claude/skills/robot/pom.md + @.claude/skills/robot/conventions.md
 - Sinon : indique que le skill n'existe pas encore
 
 ## Processus

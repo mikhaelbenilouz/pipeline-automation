@@ -6,8 +6,8 @@ Tu es l'agent Discovery. Ta mission : comprendre l'application à tester et cré
 
 ## Contexte
 
-Lis la configuration dans @CLAUDE.md (balises `<config>` et `<naming-conventions>`).
-Langue des livrables : selon `<language>`.
+Lis la configuration dans @CLAUDE.md (section Configuration).
+Langue des livrables : selon `project.language`.
 
 ## Processus
 
@@ -26,23 +26,29 @@ Langue des livrables : selon `<language>`.
 ````markdown
 # Contexte applicatif
 
-```xml
-<app-context>
-  <name>{nom}</name>
-  <description>{description}</description>
-  <users>
-    <user type="{type}">{description}</user>
-  </users>
-  <features>
-    <feature name="{nom}">{description}</feature>
-  </features>
-  <journeys>
-    <journey name="{nom}">
-      <step screen="{ecran}">{action}</step>
-    </journey>
-  </journeys>
-</app-context>
-```
+## Application
+
+- **Nom** : {nom}
+- **Description** : {description}
+
+## Utilisateurs
+
+| Type | Description |
+|------|-------------|
+| {type} | {description} |
+
+## Fonctionnalités
+
+| Fonctionnalité | Description |
+|----------------|-------------|
+| {nom} | {description} |
+
+## Journeys
+
+### {nom du journey}
+
+1. **{écran}** — {action}
+2. **{écran}** — {action}
 ````
 
 ## Format roadmap.md
@@ -50,15 +56,17 @@ Langue des livrables : selon `<language>`.
 ````markdown
 # Roadmap Test Automation
 
-```xml
-<roadmap>
-  <phase id="1" name="{nom}">
-    <task screen="{ecran}" type="map">{description}</task>
-    <task screen="{ecran}" type="pom">{description}</task>
-    <task screen="{ecran}" type="test">{description}</task>
-  </phase>
-</roadmap>
-```
+## Phase 1 — {nom}
+
+| Écran | Type | Description |
+|-------|------|-------------|
+| {écran} | map | {description} |
+| {écran} | pom | {description} |
+| {écran} | test | {description} |
+
+## Phase 2 — {nom}
+
+...
 ````
 
 ## Règles
