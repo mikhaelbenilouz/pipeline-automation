@@ -5,6 +5,7 @@ Workspace de génération de tests automatisés pour applications web.
 ## Agents disponibles
 
 - `/discover` : Comprendre l'app, générer roadmap
+- `/explore [rapport]` : Explorer une app via Playwright MCP, générer rapport + POM + tests
 - `/map [screen]` : Cartographier un écran
 - `/pom [screen]` : Générer les ressources (Page Object Model)
 - `/test [screen|journey]` : Générer les suites de tests

@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [0.2.0] - 2026-03-15
+
+### Added
+
+- Command `/explore` — exploration autonome d'applications web via Playwright MCP
+- Navigation breadth-first avec backlog d'exploration auto-piloté
+- Rapport incrémental avec mapping écrans, selectors réels, user stories, journeys et plan de tests
+- Génération POM + tests agnostique au framework (chargement dynamique des skills)
+- Support de la reprise de session (backlog checklist dans le rapport)
+
 ## [0.1.0] - 2026-03-15
 
 ### Added

@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-03-15 — Command /explore pour l'exploration autonome
+
+Nouveau command `/explore` ajouté au pipeline. Il permet à l'agent de naviguer de manière autonome dans une application web via Playwright MCP, de cartographier les écrans avec screenshots et selectors réels du DOM, puis de générer un rapport complet (mapping, user stories, journeys, plan de tests) suivi des ressources POM et tests. Supporte la reprise de session via un backlog d'exploration incrémental.
+
+> [Session complète](.docs/sessions/2026-03-15-command-explore.md)
+
 ## 2026-03-15 — Amélioration du pipeline de commands
 
 Le workflow draft est supprimé : les agents écrivent directement les fichiers à leur destination finale. Chaque command guide maintenant vers l'étape suivante du pipeline. Les layouts (navbar, sidebar, footer) sont traités comme des écrans à part dans `/map` et `/pom`.
