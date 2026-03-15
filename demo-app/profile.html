@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow — Profil</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-layout app-layout--no-sidebar">
+    <div id="navbar-container"></div>
+
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Mon profil</h1>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <!-- Mode affichage -->
+          <div id="profile-view">
+            <div class="profile-header">
+              <div class="profile-avatar" id="profile-avatar"></div>
+              <div class="profile-info">
+                <h2 id="profile-name"></h2>
+                <p id="profile-email"></p>
+                <span class="badge mt-sm" id="profile-role"></span>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn btn-primary" id="btn-edit-profile">Éditer le profil</button>
+            </div>
+          </div>
+
+          <!-- Mode édition -->
+          <div id="profile-edit" class="hidden">
+            <div class="profile-header">
+              <div class="profile-avatar" id="profile-avatar-edit"></div>
+              <div class="profile-info">
+                <h2>Modifier mes informations</h2>
+              </div>
+            </div>
+
+            <form id="profile-form" novalidate>
+              <div class="form-group">
+                <label for="edit-name" class="form-label">Nom <span class="required">*</span></label>
+                <input type="text" id="edit-name" class="form-input" required>
+              </div>
+
+              <div class="form-group">
+                <label for="edit-email" class="form-label">Email <span class="required">*</span></label>
+                <input type="email" id="edit-email" class="form-input" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Rôle</label>
+                <input type="text" id="edit-role" class="form-input" disabled>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                <button type="button" class="btn btn-secondary" id="btn-cancel-edit">Annuler</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div id="footer-container"></div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/users.js"></script>
+  <script>
+    (function () {
+      var user = App.auth.getCurrentUser();
+      if (!user) return;
+
+      var viewSection = document.getElementById('profile-view');
+      var editSection = document.getElementById('profile-edit');
+
+      var avatarEl = document.getElementById('profile-avatar');
+      var nameEl = document.getElementById('profile-name');
+      var emailEl = document.getElementById('profile-email');
+      var roleEl = document.getElementById('profile-role');
+      var avatarEditEl = document.getElementById('profile-avatar-edit');
+
+      var editNameInput = document.getElementById('edit-name');
+      var editEmailInput = document.getElementById('edit-email');
+      var editRoleInput = document.getElementById('edit-role');
+
+      var roleLabels = { admin: 'Administrateur', user: 'Utilisateur' };
+
+      function getInitials(name) {
+        return name.split(' ').map(function (w) { return w[0]; }).join('').toUpperCase();
+      }
+
+      function getRoleBadgeClass(role) {
+        return role === 'admin' ? 'badge-inprogress' : 'badge-todo';
+      }
+
+      function renderView() {
+        var initials = getInitials(user.name);
+        avatarEl.textContent = initials;
+        nameEl.textContent = user.name;
+        emailEl.textContent = user.email;
+        roleEl.textContent = roleLabels[user.role] || user.role;
+        roleEl.className = 'badge mt-sm ' + getRoleBadgeClass(user.role);
+      }
+
+      function enterEditMode() {
+        editNameInput.value = user.name;
+        editEmailInput.value = user.email;
+        editRoleInput.value = roleLabels[user.role] || user.role;
+        avatarEditEl.textContent = getInitials(user.name);
+
+        viewSection.classList.add('hidden');
+        editSection.classList.remove('hidden');
+      }
+
+      function exitEditMode() {
+        editSection.classList.add('hidden');
+        viewSection.classList.remove('hidden');
+        editNameInput.classList.remove('error');
+        editEmailInput.classList.remove('error');
+      }
+
+      renderView();
+
+      document.getElementById('btn-edit-profile').addEventListener('click', enterEditMode);
+      document.getElementById('btn-cancel-edit').addEventListener('click', exitEditMode);
+
+      document.getElementById('profile-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        editNameInput.classList.remove('error');
+        editEmailInput.classList.remove('error');
+
+        var name = editNameInput.value.trim();
+        var email = editEmailInput.value.trim();
+
+        if (!name) {
+          editNameInput.classList.add('error');
+          editNameInput.focus();
+          return;
+        }
+
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          editEmailInput.classList.add('error');
+          editEmailInput.focus();
+          return;
+        }
+
+        var updated = App.users.update(user.id, { name: name, email: email });
+
+        if (updated) {
+          var session = App.store.get('session');
+          session.user.name = updated.name;
+          session.user.email = updated.email;
+          App.store.set('session', session);
+
+          user = updated;
+          renderView();
+          exitEditMode();
+
+          App.layouts.renderNavbar(document.getElementById('navbar-container'));
+          App.utils.showNotification('Profil mis à jour avec succès.', 'success');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -6,3 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [0.1.0] - 2026-03-15
+
+### Added
+
+- Application de démo "TaskFlow" — gestionnaire de tâches HTML/CSS/JS vanilla
+- Page login avec auth simulée (email/mot de passe, "Se souvenir de moi")
+- Dashboard avec double vue liste/kanban, filtres par statut et priorité, compteurs
+- CRUD tâches (titre, description, priorité, statut, échéance, assignation, tags, pièce jointe simulée)
+- CRUD utilisateurs (nom, email, rôle admin/user)
+- Page profil avec édition inline
+- Layouts partagés (navbar avec user dropdown, sidebar filtres, footer)
+- Données de démo pré-chargées (4 utilisateurs, 10 tâches variées)
+- Design system CSS complet (variables, composants, badges, kanban, modales)
+

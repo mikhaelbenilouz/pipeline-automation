@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow — Nouvel utilisateur</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-layout app-layout--no-sidebar">
+    <div id="navbar-container"></div>
+
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Nouvel utilisateur</h1>
+      </div>
+
+      <div class="form-container">
+          <form id="user-form" novalidate>
+            <div class="form-group">
+              <label for="user-name" class="form-label">Nom <span class="required">*</span></label>
+              <input type="text" id="user-name" class="form-input" placeholder="Nom complet" required>
+            </div>
+
+            <div class="form-group">
+              <label for="user-email" class="form-label">Email <span class="required">*</span></label>
+              <input type="email" id="user-email" class="form-input" placeholder="nom@exemple.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="user-role" class="form-label">Rôle</label>
+              <select id="user-role" class="form-select">
+                <option value="user">Utilisateur</option>
+                <option value="admin">Administrateur</option>
+              </select>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Enregistrer</button>
+              <a href="users.html" class="btn btn-secondary">Annuler</a>
+            </div>
+          </form>
+      </div>
+    </main>
+
+    <div id="footer-container"></div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/users.js"></script>
+  <script>
+    (function () {
+      document.addEventListener('DOMContentLoaded', function () {
+        var form = document.getElementById('user-form');
+        var nameInput = document.getElementById('user-name');
+        var emailInput = document.getElementById('user-email');
+        var roleSelect = document.getElementById('user-role');
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          nameInput.classList.remove('error');
+          emailInput.classList.remove('error');
+
+          var name = nameInput.value.trim();
+          var email = emailInput.value.trim();
+          var role = roleSelect.value;
+
+          if (!name) {
+            nameInput.classList.add('error');
+            nameInput.focus();
+            return;
+          }
+
+          if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            emailInput.classList.add('error');
+            emailInput.focus();
+            return;
+          }
+
+          App.users.create({ name: name, email: email, role: role });
+          App.utils.showNotification('Utilisateur créé avec succès.', 'success');
+          window.location.href = 'users.html';
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

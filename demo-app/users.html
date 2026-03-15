@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow — Utilisateurs</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-layout app-layout--no-sidebar">
+    <div id="navbar-container"></div>
+
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Utilisateurs</h1>
+        <div class="page-header-actions">
+          <a href="user-new.html" class="btn btn-primary">Nouvel utilisateur</a>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table class="table" id="users-table">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Email</th>
+              <th>Rôle</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="users-tbody"></tbody>
+        </table>
+      </div>
+    </main>
+
+    <div id="footer-container"></div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/users.js"></script>
+  <script>
+    (function () {
+      function getRoleLabel(role) {
+        return role === 'admin' ? 'Administrateur' : 'Utilisateur';
+      }
+
+      function renderUsers() {
+        var users = App.users.getAll();
+        var tbody = document.getElementById('users-tbody');
+        tbody.innerHTML = '';
+
+        users.forEach(function (user) {
+          var tr = document.createElement('tr');
+          tr.innerHTML =
+            '<td>' + user.name + '</td>' +
+            '<td>' + user.email + '</td>' +
+            '<td><span class="badge ' + (user.role === 'admin' ? 'badge-inprogress' : 'badge-todo') + '">' + getRoleLabel(user.role) + '</span></td>' +
+            '<td>' +
+              '<div class="table-actions">' +
+                '<a href="user-edit.html?id=' + user.id + '" class="btn btn-secondary btn-sm">Éditer</a>' +
+                '<button class="btn btn-danger btn-sm" data-delete-id="' + user.id + '">Supprimer</button>' +
+              '</div>' +
+            '</td>';
+          tbody.appendChild(tr);
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        renderUsers();
+
+        document.getElementById('users-tbody').addEventListener('click', function (e) {
+          var btn = e.target.closest('[data-delete-id]');
+          if (!btn) return;
+
+          var id = btn.getAttribute('data-delete-id');
+          App.utils.confirmDelete('Voulez-vous vraiment supprimer cet utilisateur ?').then(function (confirmed) {
+            if (confirmed) {
+              App.users.delete(id);
+              App.utils.showNotification('Utilisateur supprimé.', 'success');
+              renderUsers();
+            }
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

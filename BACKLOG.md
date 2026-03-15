@@ -14,7 +14,7 @@ Pour les tâches terminée [voir archive.](ARCHIVE.md)
 
 ## App de démo
 
-- [ ] **TLK-1** `P0` #app **Créer l'app de gestion de tâches** — App HTML/CSS/JS multi-pages (login, dashboard, création/édition tâche, profil). Navigation fonctionnelle, CRUD avec localStorage, layouts réutilisables (navbar, sidebar, footer). Servie via `npx http-server`.
+*(aucune tâche en cours)*
 
 ## Pipeline & outillage
 

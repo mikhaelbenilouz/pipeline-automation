@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - TaskFlow</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <div id="navbar-container"></div>
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Dashboard</h1>
+        <div class="page-header-actions">
+          <div class="view-toggle" id="view-toggle">
+            <button class="view-toggle-btn active" data-view="list">Liste</button>
+            <button class="view-toggle-btn" data-view="kanban">Kanban</button>
+          </div>
+          <a href="task-new.html" class="btn btn-primary" id="btn-new-task">Nouvelle tâche</a>
+        </div>
+      </div>
+
+      <div class="stats-row" id="stats-row"></div>
+
+      <div id="view-list">
+        <div class="table-container">
+          <table class="table" id="tasks-table">
+            <thead>
+              <tr>
+                <th>Titre</th>
+                <th>Statut</th>
+                <th>Priorité</th>
+                <th>Assigné</th>
+                <th>Échéance</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="tasks-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="view-kanban" class="hidden">
+        <div class="kanban-board" id="kanban-board">
+          <div class="kanban-column" data-status="todo">
+            <div class="kanban-column-header">
+              <span class="kanban-column-title">À faire</span>
+              <span class="kanban-column-count" id="kanban-count-todo">0</span>
+            </div>
+            <div class="kanban-cards" id="kanban-cards-todo"></div>
+          </div>
+          <div class="kanban-column" data-status="inprogress">
+            <div class="kanban-column-header">
+              <span class="kanban-column-title">En cours</span>
+              <span class="kanban-column-count" id="kanban-count-inprogress">0</span>
+            </div>
+            <div class="kanban-cards" id="kanban-cards-inprogress"></div>
+          </div>
+          <div class="kanban-column" data-status="done">
+            <div class="kanban-column-header">
+              <span class="kanban-column-title">Terminé</span>
+              <span class="kanban-column-count" id="kanban-count-done">0</span>
+            </div>
+            <div class="kanban-cards" id="kanban-cards-done"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div id="footer-container"></div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/tasks.js"></script>
+  <script src="js/users.js"></script>
+  <script>
+    (function () {
+      var currentView = localStorage.getItem('dashboard-view') || 'list';
+      var currentFilters = { statuses: ['todo', 'inprogress', 'done'], priorities: ['high', 'medium', 'low'] };
+
+      var statusLabels = { todo: 'À faire', inprogress: 'En cours', done: 'Terminé' };
+      var priorityLabels = { high: 'Haute', medium: 'Moyenne', low: 'Basse' };
+
+      function renderStats() {
+        var stats = App.tasks.getStats();
+        var container = document.getElementById('stats-row');
+        container.innerHTML =
+          '<div class="stat-card">' +
+            '<div class="stat-value">' + stats.total + '</div>' +
+            '<div class="stat-label">Total</div>' +
+          '</div>' +
+          '<div class="stat-card">' +
+            '<div class="stat-value">' + stats.todo + '</div>' +
+            '<div class="stat-label">À faire</div>' +
+          '</div>' +
+          '<div class="stat-card">' +
+            '<div class="stat-value">' + stats.inprogress + '</div>' +
+            '<div class="stat-label">En cours</div>' +
+          '</div>' +
+          '<div class="stat-card">' +
+            '<div class="stat-value">' + stats.done + '</div>' +
+            '<div class="stat-label">Terminé</div>' +
+          '</div>';
+      }
+
+      function getFilteredTasks() {
+        var tasks = App.tasks.getAll();
+        return tasks.filter(function (t) {
+          return currentFilters.statuses.indexOf(t.status) !== -1 &&
+            currentFilters.priorities.indexOf(t.priority) !== -1;
+        });
+      }
+
+      function getUserName(assigneeId) {
+        if (!assigneeId) return '-';
+        var user = App.users.getById(assigneeId);
+        return user ? user.name : '-';
+      }
+
+      function renderListView(tasks) {
+        var tbody = document.getElementById('tasks-table-body');
+        if (tasks.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted" style="padding:24px">Aucune tâche à afficher</td></tr>';
+          return;
+        }
+
+        var html = '';
+        for (var i = 0; i < tasks.length; i++) {
+          var task = tasks[i];
+          html +=
+            '<tr>' +
+              '<td>' + task.title + '</td>' +
+              '<td><span class="badge badge-' + task.status + '">' + (statusLabels[task.status] || task.status) + '</span></td>' +
+              '<td><span class="badge badge-' + task.priority + '">' + (priorityLabels[task.priority] || task.priority) + '</span></td>' +
+              '<td>' + getUserName(task.assignee) + '</td>' +
+              '<td>' + App.utils.formatDate(task.dueDate) + '</td>' +
+              '<td class="table-actions"><a href="task-edit.html?id=' + task.id + '" class="btn btn-sm btn-secondary">Éditer</a></td>' +
+            '</tr>';
+        }
+        tbody.innerHTML = html;
+      }
+
+      function renderKanbanView(tasks) {
+        var columns = { todo: [], inprogress: [], done: [] };
+
+        for (var i = 0; i < tasks.length; i++) {
+          var t = tasks[i];
+          if (columns[t.status]) columns[t.status].push(t);
+        }
+
+        var statuses = ['todo', 'inprogress', 'done'];
+        for (var s = 0; s < statuses.length; s++) {
+          var status = statuses[s];
+          var cardsContainer = document.getElementById('kanban-cards-' + status);
+          var countEl = document.getElementById('kanban-count-' + status);
+          var cards = columns[status];
+
+          countEl.textContent = cards.length;
+
+          if (cards.length === 0) {
+            cardsContainer.innerHTML = '<div class="text-center text-muted" style="padding:16px;font-size:0.875rem">Aucune tâche</div>';
+            continue;
+          }
+
+          var html = '';
+          for (var c = 0; c < cards.length; c++) {
+            var task = cards[c];
+            html +=
+              '<div class="kanban-card" data-id="' + task.id + '">' +
+                '<div class="kanban-card-title">' + task.title + '</div>' +
+                '<div class="kanban-card-meta">' +
+                  '<span class="badge badge-' + task.priority + '">' + (priorityLabels[task.priority] || task.priority) + '</span>' +
+                  '<span>' + getUserName(task.assignee) + '</span>' +
+                '</div>' +
+                '<div class="kanban-card-meta mt-sm">' +
+                  '<span>' + App.utils.formatDate(task.dueDate) + '</span>' +
+                '</div>' +
+              '</div>';
+          }
+          cardsContainer.innerHTML = html;
+        }
+
+        var allCards = document.querySelectorAll('.kanban-card');
+        for (var k = 0; k < allCards.length; k++) {
+          allCards[k].addEventListener('click', function () {
+            window.location.href = 'task-edit.html?id=' + this.getAttribute('data-id');
+          });
+        }
+      }
+
+      function render() {
+        renderStats();
+        var tasks = getFilteredTasks();
+        renderListView(tasks);
+        renderKanbanView(tasks);
+      }
+
+      function setView(view) {
+        currentView = view;
+        localStorage.setItem('dashboard-view', view);
+
+        var listView = document.getElementById('view-list');
+        var kanbanView = document.getElementById('view-kanban');
+
+        if (view === 'list') {
+          listView.classList.remove('hidden');
+          kanbanView.classList.add('hidden');
+        } else {
+          listView.classList.add('hidden');
+          kanbanView.classList.remove('hidden');
+        }
+
+        var buttons = document.querySelectorAll('.view-toggle-btn');
+        for (var i = 0; i < buttons.length; i++) {
+          if (buttons[i].getAttribute('data-view') === view) {
+            buttons[i].classList.add('active');
+          } else {
+            buttons[i].classList.remove('active');
+          }
+        }
+      }
+
+      document.getElementById('view-toggle').addEventListener('click', function (e) {
+        var btn = e.target.closest('.view-toggle-btn');
+        if (!btn) return;
+        setView(btn.getAttribute('data-view'));
+      });
+
+      document.addEventListener('sidebar-filter-change', function (e) {
+        currentFilters.statuses = e.detail.statuses;
+        currentFilters.priorities = e.detail.priorities;
+        var tasks = getFilteredTasks();
+        renderListView(tasks);
+        renderKanbanView(tasks);
+      });
+
+      document.addEventListener('DOMContentLoaded', function () {
+        setView(currentView);
+        render();
+      });
+    })();
+  </script>
+</body>
+</html>

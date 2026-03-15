@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow — Nouvelle tâche</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-layout app-layout--no-sidebar">
+    <div id="navbar-container"></div>
+
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Nouvelle tâche</h1>
+      </div>
+
+      <div class="form-container">
+          <form id="task-form" novalidate>
+            <div class="form-group">
+              <label for="task-title" class="form-label">Titre <span class="required">*</span></label>
+              <input type="text" id="task-title" class="form-input" placeholder="Titre de la tâche" required>
+            </div>
+
+            <div class="form-group">
+              <label for="task-description" class="form-label">Description</label>
+              <textarea id="task-description" class="form-textarea" placeholder="Description de la tâche"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="task-priority" class="form-label">Priorité</label>
+              <select id="task-priority" class="form-select">
+                <option value="low">Basse</option>
+                <option value="medium" selected>Moyenne</option>
+                <option value="high">Haute</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="task-status" class="form-label">Statut</label>
+              <select id="task-status" class="form-select">
+                <option value="todo" selected>À faire</option>
+                <option value="inprogress">En cours</option>
+                <option value="done">Terminé</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="task-due-date" class="form-label">Date d'échéance</label>
+              <input type="date" id="task-due-date" class="form-input">
+            </div>
+
+            <div class="form-group">
+              <label for="task-assignee" class="form-label">Assignation</label>
+              <select id="task-assignee" class="form-select">
+                <option value="">Non assigné</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="task-tags" class="form-label">Tags</label>
+              <input type="text" id="task-tags" class="form-input" placeholder="Séparés par des virgules">
+              <span class="form-hint">Ex : bug, feature, documentation</span>
+            </div>
+
+            <div class="form-group">
+              <label for="task-attachment" class="form-label">Pièce jointe</label>
+              <input type="file" id="task-attachment" class="form-input">
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Enregistrer</button>
+              <a href="dashboard.html" class="btn btn-secondary">Annuler</a>
+            </div>
+          </form>
+      </div>
+    </main>
+
+    <div id="footer-container"></div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/tasks.js"></script>
+  <script src="js/users.js"></script>
+  <script>
+    (function () {
+      document.addEventListener('DOMContentLoaded', function () {
+        var assigneeSelect = document.getElementById('task-assignee');
+        var users = App.users.getAll();
+        App.utils.populateSelect(assigneeSelect, users, 'id', 'name');
+
+        var form = document.getElementById('task-form');
+        var titleInput = document.getElementById('task-title');
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          titleInput.classList.remove('error');
+
+          var title = titleInput.value.trim();
+          if (!title) {
+            titleInput.classList.add('error');
+            titleInput.focus();
+            return;
+          }
+
+          var tagsRaw = document.getElementById('task-tags').value.trim();
+          var tags = tagsRaw ? tagsRaw.split(',').map(function (t) { return t.trim(); }).filter(Boolean) : [];
+
+          var attachmentInput = document.getElementById('task-attachment');
+          var attachment = attachmentInput.files.length > 0 ? attachmentInput.files[0].name : null;
+
+          App.tasks.create({
+            title: title,
+            description: document.getElementById('task-description').value.trim(),
+            priority: document.getElementById('task-priority').value,
+            status: document.getElementById('task-status').value,
+            dueDate: document.getElementById('task-due-date').value || null,
+            assignee: document.getElementById('task-assignee').value || null,
+            tags: tags,
+            attachment: attachment
+          });
+
+          App.utils.showNotification('Tâche créée avec succès.', 'success');
+          window.location.href = 'dashboard.html';
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

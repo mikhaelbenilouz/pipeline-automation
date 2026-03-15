@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow — Connexion</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="login-layout">
+    <div class="login-container">
+      <div class="login-card">
+        <h1>TaskFlow</h1>
+        <p class="login-subtitle">Connectez-vous pour accéder à votre espace</p>
+
+        <div id="login-error" class="form-error hidden" role="alert"></div>
+
+        <form id="login-form" novalidate>
+          <div class="form-group">
+            <label for="email" class="form-label">Email <span class="required">*</span></label>
+            <input type="email" id="email" class="form-input" placeholder="nom@exemple.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label">Mot de passe <span class="required">*</span></label>
+            <input type="password" id="password" class="form-input" placeholder="Votre mot de passe" required>
+          </div>
+
+          <div class="d-flex align-center justify-between mb-md">
+            <div class="form-check">
+              <input type="checkbox" id="remember-me">
+              <label for="remember-me">Se souvenir de moi</label>
+            </div>
+            <a href="#" class="form-link">Mot de passe oublié ?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg">Se connecter</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    (function () {
+      if (App.auth.isAuthenticated()) {
+        window.location.href = 'dashboard.html';
+        return;
+      }
+
+      var form = document.getElementById('login-form');
+      var emailInput = document.getElementById('email');
+      var passwordInput = document.getElementById('password');
+      var errorBox = document.getElementById('login-error');
+
+      function showError(message) {
+        errorBox.textContent = message;
+        errorBox.classList.remove('hidden');
+        errorBox.style.animation = 'none';
+        errorBox.offsetHeight;
+        errorBox.style.animation = '';
+      }
+
+      function hideError() {
+        errorBox.classList.add('hidden');
+      }
+
+      function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        hideError();
+
+        emailInput.classList.remove('error');
+        passwordInput.classList.remove('error');
+
+        var email = emailInput.value.trim();
+        var password = passwordInput.value;
+
+        if (!email) {
+          emailInput.classList.add('error');
+          showError('Veuillez saisir votre adresse email.');
+          emailInput.focus();
+          return;
+        }
+
+        if (!validateEmail(email)) {
+          emailInput.classList.add('error');
+          showError('Veuillez saisir une adresse email valide.');
+          emailInput.focus();
+          return;
+        }
+
+        if (!password) {
+          passwordInput.classList.add('error');
+          showError('Veuillez saisir votre mot de passe.');
+          passwordInput.focus();
+          return;
+        }
+
+        var result = App.auth.login(email, password);
+
+        if (result.success) {
+          window.location.href = 'dashboard.html';
+        } else {
+          showError(result.error);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
