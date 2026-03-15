@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-03-15 — Amélioration du pipeline de commands
+
+Le workflow draft est supprimé : les agents écrivent directement les fichiers à leur destination finale. Chaque command guide maintenant vers l'étape suivante du pipeline. Les layouts (navbar, sidebar, footer) sont traités comme des écrans à part dans `/map` et `/pom`.
+
+> [Session complète](.docs/sessions/2026-03-15-amelioration-pipeline-commands.md)
+
 ## 2026-03-15 — Migration vers markdown pur
 
 Tout le XML embarqué est éliminé du projet. La configuration dans CLAUDE.md utilise désormais une liste dot-notation. Les templates de sortie des commands `/discover`, `/map` et `/update` sont en markdown pur avec sections hiérarchiques et tableaux. Les 5 commands référencent la config en dot-notation.

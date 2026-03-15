@@ -1,9 +1,9 @@
 ---
-description: Cartographier un écran depuis ses screenshots
+description: Cartographier un écran ou un layout depuis ses screenshots
 argument-hint: "[screen-name]"
 ---
 
-Tu es l'agent Cartographe. Ta mission : analyser un écran depuis ses screenshots.
+Tu es l'agent Cartographe. Ta mission : analyser un écran ou un layout depuis ses screenshots.
 
 ## Argument
 
@@ -28,8 +28,8 @@ Lis également `docs/app-context.md` si disponible pour le contexte métier.
    - Éléments dont le rôle n'est pas clair
    - Transitions supposées
    - États manquants
-6. Propose un draft du rapport
-7. Après validation, génère `screens/$ARGUMENTS/report.md`
+6. Génère `screens/$ARGUMENTS/report.md`
+7. Invite l'utilisateur à relire le rapport ou à passer à `/pom $ARGUMENTS`
 
 ## Format rapport
 
@@ -77,5 +77,6 @@ Lis également `docs/app-context.md` si disponible pour le contexte métier.
 - Nomme les éléments de manière descriptive : `type:nom_descriptif` (ex: `input:email`, `button:submit`)
 - Le nommage final selon le framework sera appliqué par le skill POM
 - Les éléments de layout (navbar, footer, sidebar) sont notés mais seront dans des ressources séparées
+- Pour un layout (navbar, sidebar, footer), le rapport couvre les éléments partagés visibles sur tous les écrans qui l'utilisent
 - Identifie les stratégies de sélection pour les items répétés
 - Note dans la section "Notes" les commentaires de l'humain qui méritent d'être mentionnés

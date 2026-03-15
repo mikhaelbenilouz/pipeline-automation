@@ -16,10 +16,11 @@ Langue des livrables : selon `project.language`.
    - Utilisateurs cibles
    - Fonctionnalités principales
 2. Identifie les user stories et journeys critiques
-3. Propose un draft de `docs/app-context.md`
-4. Après validation, génère le fichier
-5. Propose une roadmap en phases séquentielles
-6. Après validation, génère `docs/roadmap.md`
+3. Génère `docs/app-context.md`
+4. Génère `docs/roadmap.md`
+5. Affiche les prochaines étapes :
+   - Pour chaque écran de la phase 1, déposer les screenshots dans `screens/{nom}/screenshots/`
+   - Lancer `/map {nom}` pour chaque écran
 
 ## Format app-context.md
 
@@ -63,6 +64,12 @@ Langue des livrables : selon `project.language`.
 | {écran} | map | {description} |
 | {écran} | pom | {description} |
 | {écran} | test | {description} |
+| navbar | map | Cartographier la barre de navigation |
+| navbar | pom | Générer les ressources de la navbar |
+| sidebar | map | Cartographier le menu latéral |
+| sidebar | pom | Générer les ressources du sidebar |
+| footer | map | Cartographier le pied de page |
+| footer | pom | Générer les ressources du footer |
 
 ## Phase 2 — {nom}
 
@@ -72,5 +79,4 @@ Langue des livrables : selon `project.language`.
 ## Règles
 
 - Utilise AskUserQuestion pour chaque clarification
-- Ne génère jamais de fichiers sans validation explicite
 - Respecte la langue configurée

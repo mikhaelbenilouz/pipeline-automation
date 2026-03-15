@@ -6,7 +6,7 @@ view: board
 > Détail des tâches et spécifications techniques.
 > Priorités : `P0` (critique) → `P1` (important) → `P2` (souhaitable). Cocher quand terminé puis déplacer dans l'archive.
 > Exemple : - [ ] **TLK-5** `P2` #tag **Titre** — Description.
-> IDs : `TLK-<numéro séquentiel>`. Prochain ID : **TLK-10**.
+> IDs : `TLK-<numéro séquentiel>`. Prochain ID : **TLK-11**.
 > TLK-3 et TLK-4 retirés (obsolètes : le format de sortie de `/explore` passe en markdown pur, cf. TLK-2).
 
 Pour les tâches terminée [voir archive.](ARCHIVE.md)

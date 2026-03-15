@@ -15,12 +15,11 @@ Workspace de génération de tests automatisés pour applications web.
 - **project.name** : MonApp
 - **project.language** : fr
 - **project.framework** : robot
-- **validation.require-draft-approval** : true
 - **output.path** : ./output/robot
 
 ## Règles globales
 
-- Validation humaine obligatoire avant génération finale
+- L'utilisateur relit les fichiers générés et fait ses remarques
 - Pas de mention d'IA/agent dans les fichiers générés
 - Pas de commentaires excessifs
 - Les layouts (navbar, sidebar, footer) ont leurs propres ressources
@@ -31,7 +30,7 @@ Workspace de génération de tests automatisés pour applications web.
 1. `/discover` → roadmap
 2. Déposer screenshots dans `screens/{nom}/screenshots/`
 3. `/map {nom}` → rapport d'écran
-4. `/pom {nom}` → ressources (draft puis final)
+4. `/pom {nom}` → ressources
 5. Remplir les `__SELECTOR__`
 6. `/test {nom}` → suites de tests
 7. `/update` si évolution
@@ -39,7 +38,7 @@ Workspace de génération de tests automatisés pour applications web.
 ## Structure des fichiers générés
 
 ```
-output/{framework}/
+{output.path}/
 ├── resources/
 │   ├── pages/          # POM par écran
 │   ├── layouts/        # navbar, sidebar, footer

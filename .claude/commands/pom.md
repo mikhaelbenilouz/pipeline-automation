@@ -29,9 +29,10 @@ Charge le skill du framework (conventions de nommage incluses) :
    - Stratégies de sélection pour items répétés
    - Vérifications métier
 3. Pose des questions si clarification nécessaire avec AskUserQuestion
-4. Génère un draft dans `drafts/pom/`
-5. Présente le draft pour validation
-6. Après validation, déplace vers `output/{framework}/resources/pages/`
+4. Génère le fichier `.resource` directement :
+   - Si `$ARGUMENTS` est un layout (navbar, sidebar, footer) → écrire dans `resources/layouts/` sous `output.path`
+   - Sinon → écrire dans `resources/pages/` sous `output.path`
+5. Invite l'utilisateur à relire la resource et remplir les `__SELECTOR__`, ou à passer à `/test $ARGUMENTS`
 
 ## Règles globales
 
@@ -40,5 +41,5 @@ Charge le skill du framework (conventions de nommage incluses) :
 - Keywords métier uniquement ou à valeur ajoutée (stratégie de selection complexe, récupération de plusieurs données dans un dictionnaire)
 - Pas de commentaires excessifs
 - Aucune mention de génération automatique
-- Layouts dans `resources/layouts/`
+- Si `$ARGUMENTS` est un layout (navbar, sidebar, footer), le fichier est écrit dans `resources/layouts/` sous `output.path` ; sinon dans `resources/pages/`
 - Synchronisation sur éléments, jamais de waits en dur

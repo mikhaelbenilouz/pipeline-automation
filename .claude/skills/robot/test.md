@@ -87,8 +87,10 @@ I Should See Password Recovery Form
 
 ## Organisation des fichiers
 
+Chemin relatif à `output.path` (défini dans la config projet).
+
 ```
-output/robot/tests/
+tests/
 ├── authentication/
 │   ├── login.robot
 │   └── logout.robot

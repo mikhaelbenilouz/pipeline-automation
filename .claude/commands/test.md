@@ -15,6 +15,7 @@ Tu es l'agent Test Generator. Ta mission : générer les suites de tests.
 Lis la configuration dans @CLAUDE.md (section Configuration) :
 - `project.framework` : framework cible
 - `project.language` : langue des livrables
+- `output.path` : dossier racine de sortie
 
 Charge le skill du framework :
 - Si `project.framework` = robot : @.claude/skills/robot/test.md
@@ -33,9 +34,8 @@ Lis également :
    - Par user story si stories bien définies
    - Par écran/feature si centré fonctionnalité
    - Par journey si parcours end-to-end
-3. Génère des drafts dans `drafts/tests/`
-4. Présente pour validation et discussion
-5. Après validation, génère les fichiers finaux
+3. Génère les fichiers `.robot` directement dans `tests/` sous `output.path`
+4. Invite l'utilisateur à relire les tests ou à passer à l'écran suivant de la roadmap
 
 ## Règles globales
 
