@@ -16,6 +16,7 @@ Pour les tâches à faire [voir backlog.](BACKLOG.md)
 
 ## Exploration autonome (Playwright MCP)
 
+- [x] **TLK-9** `P0` #explore **Configurer Playwright MCP** — Installer et configurer le serveur Playwright MCP dans le workspace. Fait : fichier `.mcp.json` ajouté, agent capable de naviguer, capturer et interagir avec une page locale.
 - [x] **TLK-2** `P0` #explore **Créer le command `/explore`** — Command Claude qui orchestre l'exploration automatique de l'app via Playwright MCP : navigation écran par écran, prise de screenshots, extraction des éléments interactifs du DOM (selectors, types, labels), génération de fichiers markdown de mapping dans `screens/{nom}/`. Fait : command `.claude/commands/explore.md` créé avec 4 phases (onboarding, exploration breadth-first avec backlog, rapport incrémental avec plan de tests, génération POM+tests), chargement dynamique des skills framework, mécanique de reprise de session, selectors réels du DOM. CLAUDE.md mis à jour. [Session](.docs/sessions/2026-03-15-command-explore.md)
 
 ## Pipeline & outillage

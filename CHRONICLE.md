@@ -4,6 +4,10 @@
 
 ---
 
+## 2026-03-16 — Configuration Playwright MCP
+
+Le serveur Playwright MCP est configuré dans le workspace via un fichier `.mcp.json`. L'agent peut désormais naviguer dans les applications web, capturer des screenshots et interagir avec les pages locales de manière autonome.
+
 ## 2026-03-15 — Command /explore pour l'exploration autonome
 
 Nouveau command `/explore` ajouté au pipeline. Il permet à l'agent de naviguer de manière autonome dans une application web via Playwright MCP, de cartographier les écrans avec screenshots et selectors réels du DOM, puis de générer un rapport complet (mapping, user stories, journeys, plan de tests) suivi des ressources POM et tests. Supporte la reprise de session via un backlog d'exploration incrémental.

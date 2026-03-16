@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [Unreleased]
+
+### Added
+
+- Configuration Playwright MCP (`.mcp.json`) pour l'exploration autonome via l'agent
+
 ## [0.2.0] - 2026-03-15
 
 ### Added

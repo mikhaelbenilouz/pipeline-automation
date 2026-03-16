@@ -22,3 +22,13 @@ __pycache__/
 *.py[cod]
 .env
 venv/
+
+.docs/
+.playwright-mcp/
+
+*.resource
+*.robot
+screens/**/*.png
+
+presentation.md
+explore-report.md

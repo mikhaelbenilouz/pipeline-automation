@@ -57,6 +57,11 @@ output/{framework}/
 └── tests/              # Suites de tests
 ```
 
+## App de test
+
+TaskFlow est une application de gestion de tâches destinée aux équipes projet.    
+Elle permet à un gestionnaire ou un membre d'équipe de se connecter, consulter ses tâches sur un dashboard avec une vue liste ou kanban, filtrer par statut et priorité, puis créer, modifier ou supprimer des tâches. Chaque tâche peut être assignée à un membre de l'équipe. L'application permet aussi de gérer les utilisateurs, les créer, modifier leurs informations ou les supprimer, avec deux rôles, administrateur et utilisateur. Chaque utilisateur a accès à sa page profil pour consulter et modifier ses informations. 
+
 ## Licence
 
 MIT
