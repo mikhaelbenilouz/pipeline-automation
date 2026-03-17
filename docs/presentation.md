@@ -13,6 +13,11 @@ On part d'une application web existante et on arrive à des **tests Robot Framew
 
 ## Concepts clés
 
+![Screenshot](assets/image1.png)   
+![Screenshot](assets/image2.png)  
+![Screenshot](assets/image3.png)  
+![Screenshot](assets/image4.png)  
+
 ### Les skills
 
 Les skills sont des **fichiers de connaissances spécialisées** chargés par les commandes au moment de l'exécution. Ils contiennent les conventions, patterns et règles propres à un framework ou un domaine.
