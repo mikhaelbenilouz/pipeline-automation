@@ -30,5 +30,4 @@ venv/
 *.robot
 screens/**/*.png
 
-presentation.md
 explore-report.md

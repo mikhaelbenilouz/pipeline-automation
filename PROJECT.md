@@ -100,7 +100,3 @@ Lancer l'app (http-server)
 | Playwright MCP | Exploration automatisée |
 | Claude Code | Agent de génération |
 | Robot Framework | Framework de test cible |
-
-## Décisions
-
-- **Markdown pur** — Abandonner le XML embarqué dans les fichiers markdown. Tous les formats de sortie (app-context, roadmap, reports, plans) et la configuration dans CLAUDE.md doivent utiliser du markdown pur avec des sections bien établies. Les commandes dans `.claude/commands/` doivent être adaptées en conséquence.
