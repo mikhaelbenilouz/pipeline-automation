@@ -2,8 +2,9 @@
 drafts/pom/*.resource
 drafts/tests/*.robot
 
-# Output Robot Framework
-output/robot/
+# Output Robot Framework — ignore le contenu, garde la structure (.gitkeep)
+output/robot/**/*
+!output/robot/**/.gitkeep
 
 # OS
 .DS_Store
@@ -29,5 +30,3 @@ venv/
 screens/**/*.png
 
 explore-report.md
-
-.tailk/settings.json
