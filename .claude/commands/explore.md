@@ -46,7 +46,7 @@ Objectif : collecter le minimum pour démarrer. L'exploration révélera le rest
    a. Prendre un screenshot → `screens/{slug}/screenshots/screenshot.png`
    b. Extraire les éléments interactifs du DOM : inputs, boutons, liens, selectors réels (CSS ou XPath)
    c. Identifier les layouts partagés (navbar, sidebar, footer) et leurs éléments — les documenter une seule fois dans la section Layouts
-   d. Mettre à jour le rapport **immédiatement** : ajouter la section de l'écran avec ses éléments, états, transitions
+   d. **IMPORTANT!** Mettre à jour le rapport **immédiatement** : ajouter la section de l'écran avec ses éléments, états, transitions
    e. Cocher `[x]` l'item correspondant dans le backlog
    f. Ajouter les nouvelles pages/actions découvertes comme `[ ]` dans le backlog
 4. Dépiler le prochain item `[ ]` du backlog, naviguer, répéter

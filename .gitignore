@@ -2,10 +2,8 @@
 drafts/pom/*.resource
 drafts/tests/*.robot
 
-# Logs Robot Framework
-output/robot/log.html
-output/robot/report.html
-output/robot/output.xml
+# Output Robot Framework
+output/robot/
 
 # OS
 .DS_Store
@@ -31,3 +29,5 @@ venv/
 screens/**/*.png
 
 explore-report.md
+
+.tailk/settings.json
