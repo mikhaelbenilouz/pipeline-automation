@@ -22,6 +22,7 @@ __pycache__/
 .env
 venv/
 
+.claude/worktrees/
 .docs/
 .playwright-mcp/
 
