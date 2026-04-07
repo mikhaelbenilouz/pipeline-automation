@@ -1,0 +1,17 @@
+{
+  "terminals": [
+    {
+      "label": "Claude",
+      "command": "claude",
+      "description": "",
+      "options": [],
+      "tabName": "cc"
+    },
+    {
+      "label": "App demo",
+      "command": "npx http-server demo-app",
+      "description": "",
+      "options": []
+    }
+  ]
+}
